@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html lang="null">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="随风的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Android硬解码 | 随风的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="随风的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+    <div class="hide">
+    	<script src="https://s4.cnzz.com/z_stat.php?id=1263868967&web_id=1263868967" language="JavaScript"></script>
+    </div>
+
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="">
+            <img src="/img/avatar.jpg" alt="logo头像">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 梦想不只是说说而已 </h2>
+             
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation"><a href="/"><i class="fa fa-fw "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/前端/"><i class="fa fa-fw "></i>前端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/后端/"><i class="fa fa-fw "></i>后端</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/工具/"><i class="fa fa-fw "></i>工具</a>
+                            </li>
+                        
+                            <li role="presentation"><a href="/categories/资源/"><i class="fa fa-fw "></i>资源</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Android硬解码">
+            
+	            Android硬解码
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span> </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            解码
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/01/27</span>
+    </span>
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>首先初始化解码器： 其中包括视频解码器 和 音频解码器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN) &#123;</span><br><span class="line">          extractor = new MediaExtractor();</span><br><span class="line">          audioExtractor = new MediaExtractor();</span><br><span class="line">          try &#123;</span><br><span class="line">              extractor.setDataSource(path);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">              audioExtractor.setDataSource(path);</span><br><span class="line">              for (int i = 0; i &lt; extractor.getTrackCount(); i++) &#123;</span><br><span class="line">                  MediaFormat format = extractor.getTrackFormat(i);</span><br><span class="line">                  String mime = format.getString(MediaFormat.KEY_MIME);</span><br><span class="line">                  Log.i(TAG, &quot;mime: &quot; + mime);</span><br><span class="line">                  if (mime.startsWith(&quot;video/&quot;)) &#123;</span><br><span class="line">                      extractor.selectTrack(i);</span><br><span class="line">                      decoder = MediaCodec.createDecoderByType(mime);</span><br><span class="line">                      decoder.configure(format, surfaceHolder.getSurface(), null, 0);</span><br><span class="line">                      //format.setInteger(MediaFormat.KEY_FRAME_RATE, 30);//帧率</span><br><span class="line">                      //format.setInteger(MediaFormat.KEY_BIT_RATE, 17648);//设置比特率</span><br><span class="line">                      decoder.start();</span><br><span class="line">                      Log.i(TAG, &quot;createDecoder mime: &quot; + mime);</span><br><span class="line">                      //break;</span><br><span class="line">                  &#125; else if (mime.startsWith(&quot;audio/&quot;)) &#123;</span><br><span class="line">                      audioExtractor.selectTrack(i);</span><br><span class="line">                      audioDecoder = MediaCodec.createDecoderByType(mime);</span><br><span class="line">                      //采样率</span><br><span class="line">                      format.setInteger(MediaFormat.KEY_SAMPLE_RATE, 8000);</span><br><span class="line">                      //声道个数</span><br><span class="line">                      format.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 1);</span><br><span class="line">                      //比特率</span><br><span class="line">                      format.setInteger(MediaFormat.KEY_BIT_RATE, 0);</span><br><span class="line">                      format.setInteger(MediaFormat.KEY_AAC_PROFILE, MediaCodecInfo.CodecProfileLevel.AACObjectLC);</span><br><span class="line">                      //ByteBuffer key（暂时不了解该参数的含义，但必须设置）</span><br><span class="line">                      audioDecoder.configure(format, null, null, 0);</span><br><span class="line">                      audioDecoder.start();</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              if (audioDecoder!=null)&#123;</span><br><span class="line"></span><br><span class="line">                  audio = new AudioDecodecPlay();</span><br><span class="line">                  audio.start();</span><br><span class="line">              &#125;</span><br><span class="line">              if (decoder != null) &#123;</span><br><span class="line">                  DecodecPlay play = new DecodecPlay();</span><br><span class="line">                  play.start();</span><br><span class="line">                  Log.i(TAG, &quot;initDecoder: 找不到解码器&quot;);</span><br><span class="line">                  return false;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125; catch (IOException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">          &#125;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          Log.i(TAG, &quot;initDecoder: failed&quot;);</span><br><span class="line">          return false;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>初始化解码器就可以开始解码了：<br>        视频解码线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">private class DecodecPlay extends Thread &#123;</span><br><span class="line"></span><br><span class="line">       @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)</span><br><span class="line">       @Override</span><br><span class="line">       public void run() &#123;</span><br><span class="line">           ByteBuffer[] inputBuffers = decoder.getInputBuffers();</span><br><span class="line">           ByteBuffer[] outputBuffers = decoder.getOutputBuffers();</span><br><span class="line">           MediaCodec.BufferInfo info = new MediaCodec.BufferInfo();</span><br><span class="line">           boolean first = false;</span><br><span class="line">           long startMs=0;</span><br><span class="line">           boolean isEndOfStream = false;</span><br><span class="line">           while (!Thread.interrupted()) &#123;</span><br><span class="line">               if (!isEndOfStream) &#123;</span><br><span class="line">                   int dequeueIndex = decoder.dequeueInputBuffer(1000);</span><br><span class="line">                   Log.i(TAG, &quot;dequeueIndex: &quot; + dequeueIndex);</span><br><span class="line">                   if (dequeueIndex &gt; 0) &#123;</span><br><span class="line"></span><br><span class="line">                       ByteBuffer inputBuffer = inputBuffers[dequeueIndex];</span><br><span class="line">                       int sampleSize = extractor.readSampleData(inputBuffer, 0);</span><br><span class="line"></span><br><span class="line">                       if (sampleSize&lt;0)&#123;</span><br><span class="line">                           Log.e(TAG, &quot;input buffer end of stream&quot;);</span><br><span class="line">                           decoder.queueInputBuffer(dequeueIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);</span><br><span class="line">                           isEndOfStream = true;</span><br><span class="line">                       &#125;else &#123;</span><br><span class="line">                           Log.i(TAG, &quot;time: &quot;+extractor.getSampleTime());</span><br><span class="line">                           decoder.queueInputBuffer(dequeueIndex, 0, sampleSize, extractor.getSampleTime(), 0);</span><br><span class="line">                           extractor.advance();</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line"></span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               int outputIndex = decoder.dequeueOutputBuffer(info, 10000);</span><br><span class="line">               switch (outputIndex)&#123;</span><br><span class="line">                   case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:</span><br><span class="line">                       Log.i(TAG, &quot;--缓冲区已经更改&quot;);</span><br><span class="line">                       outputBuffers = decoder.getOutputBuffers();</span><br><span class="line">                       break;</span><br><span class="line">                   case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:</span><br><span class="line">                       Log.i(TAG, &quot;--格式以及更改-----&gt; &quot;+decoder.getOutputFormat().getString(MediaFormat.KEY_MIME));</span><br><span class="line">                       break;</span><br><span class="line">                   case MediaCodec.INFO_TRY_AGAIN_LATER:</span><br><span class="line">                       Log.i(TAG, &quot;dequeueOutputBuffer  indicates that the call timed out.&quot;);</span><br><span class="line">                       break;</span><br><span class="line">                   default:</span><br><span class="line">                       Log.i(TAG, &quot;run: outputIndex01&quot;+outputIndex);</span><br><span class="line">                       if (!first)&#123;</span><br><span class="line">                           startMs = System.currentTimeMillis();</span><br><span class="line">                           first=true;</span><br><span class="line">                       &#125;</span><br><span class="line">                       Log.i(TAG, &quot;info.presentationTimeUs: &quot;+info.presentationTimeUs/1000+&quot;::::&quot;+(System.currentTimeMillis() - startMs));</span><br><span class="line">                       long sleepTime = (info.presentationTimeUs / 1000) - (System.currentTimeMillis() - startMs);</span><br><span class="line">                       if (sleepTime&gt;0)&#123;</span><br><span class="line">                           try &#123;</span><br><span class="line">                               sleep(sleepTime);</span><br><span class="line">                           &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                               e.printStackTrace();</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;</span><br><span class="line"></span><br><span class="line">                       decoder.releaseOutputBuffer(outputIndex, true);</span><br><span class="line">                       break;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               if((info.flags &amp; MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0)&#123;</span><br><span class="line">                   Log.d(TAG, &quot;Output buffer BUFFER_FLAG_END_OF_STREAM&quot;);</span><br><span class="line">                   finish();</span><br><span class="line">                   break;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           decoder.stop();</span><br><span class="line">           decoder.release();</span><br><span class="line">           extractor.release();</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>音频解码线程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">private class AudioDecodecPlay extends Thread &#123;</span><br><span class="line"></span><br><span class="line">      @TargetApi(Build.VERSION_CODES.LOLLIPOP)</span><br><span class="line">      @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)</span><br><span class="line">      @Override</span><br><span class="line">      public void run() &#123;</span><br><span class="line">         boolean first=false;</span><br><span class="line">          ByteBuffer[] inputBuffers = audioDecoder.getInputBuffers();</span><br><span class="line">          ByteBuffer[] outputBuffers = audioDecoder.getOutputBuffers();</span><br><span class="line">          MediaCodec.BufferInfo info = new MediaCodec.BufferInfo();</span><br><span class="line">          boolean isEndOfStream = false;</span><br><span class="line">          long startMs = 0;</span><br><span class="line">          while (!Thread.interrupted()) &#123;</span><br><span class="line">              if (!isEndOfStream) &#123;</span><br><span class="line">                  int dequeueIndex = audioDecoder.dequeueInputBuffer(1000);</span><br><span class="line">                  Log.i(TAG, &quot;dequeueIndex: &quot; + dequeueIndex);</span><br><span class="line">                  if (dequeueIndex &gt; 0) &#123;</span><br><span class="line"></span><br><span class="line">                      ByteBuffer inputBuffer = inputBuffers[dequeueIndex];</span><br><span class="line">                      int sampleSize = audioExtractor.readSampleData(inputBuffer, 0);</span><br><span class="line">                      if (sampleSize&lt;0)&#123;</span><br><span class="line">                          Log.e(TAG, &quot;input buffer end of stream&quot;);</span><br><span class="line">                          audioDecoder.queueInputBuffer(dequeueIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);</span><br><span class="line">                          isEndOfStream = true;</span><br><span class="line">                      &#125;else &#123;</span><br><span class="line">                          audioDecoder.queueInputBuffer(dequeueIndex, 0, sampleSize, audioExtractor.getSampleTime(), 0);</span><br><span class="line">                          audioExtractor.advance();</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              int outputIndex = audioDecoder.dequeueOutputBuffer(info, 10000);</span><br><span class="line">              switch (outputIndex)&#123;</span><br><span class="line">                  case MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED:</span><br><span class="line">                      Log.i(TAG, &quot;--缓冲区已经更改&quot;);</span><br><span class="line">                      outputBuffers = audioDecoder.getOutputBuffers();</span><br><span class="line">                      break;</span><br><span class="line">                  case MediaCodec.INFO_OUTPUT_FORMAT_CHANGED:</span><br><span class="line">                      Log.i(TAG, &quot;--格式以及更改-----&gt; &quot;+decoder.getOutputFormat().getString(MediaFormat.KEY_MIME));</span><br><span class="line">                      break;</span><br><span class="line">                  case MediaCodec.INFO_TRY_AGAIN_LATER:</span><br><span class="line">                      Log.i(TAG, &quot;dequeueOutputBuffer  indicates that the call timed out.&quot;);</span><br><span class="line">                      break;</span><br><span class="line">                  default:</span><br><span class="line">                      Log.i(TAG, &quot;run: outputIndex02&quot;+outputIndex);</span><br><span class="line">                      if (!first)&#123;</span><br><span class="line">                          startMs = System.currentTimeMillis();</span><br><span class="line">                          first=true;</span><br><span class="line">                      &#125;</span><br><span class="line">                      Log.i(TAG, &quot;info.presentationTimeUs: &quot;+info.presentationTimeUs/1000+&quot;::::&quot;+(System.currentTimeMillis() - startMs));</span><br><span class="line">                      long sleepTime = (info.presentationTimeUs / 1000) - (System.currentTimeMillis() - startMs);</span><br><span class="line">                      if (sleepTime&gt;0)&#123;</span><br><span class="line">                          try &#123;</span><br><span class="line">                              sleep(sleepTime);</span><br><span class="line">                          &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                              e.printStackTrace();</span><br><span class="line">                          &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                      ByteBuffer buffer = outputBuffers[outputIndex];</span><br><span class="line">                      byte[] data = new byte[buffer.remaining()];</span><br><span class="line">                      buffer.get(data);</span><br><span class="line">                      mPlayer.write(data,0,data.length);</span><br><span class="line">                      audioDecoder.releaseOutputBuffer(outputIndex, false);</span><br><span class="line">                      break;</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">              if((info.flags &amp; MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0)&#123;</span><br><span class="line">                  Log.d(TAG, &quot;Output buffer BUFFER_FLAG_END_OF_STREAM&quot;);</span><br><span class="line">                  break;</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          audioDecoder.stop();</span><br><span class="line">          audioDecoder.release();</span><br><span class="line">          audioExtractor.release();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>关键代码就这么多！！！<br>        解码后的音频可以使用AudioTrack播放<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mPlayer = new AudioTrack(AudioManager.STREAM_MUSIC,</span><br><span class="line">              sampleRateInHz, channelConfig, audioFormat,2880,</span><br><span class="line">              AudioTrack.MODE_STREAM);</span><br><span class="line">      mPlayer.play();</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/01/18/FFmpeg 编译/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
+</div>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/shenliyang" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="qcg34cxy@126.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">January 2018</i></a><span class="archive-list-count">2</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/解码/" style="font-size: 10px;">解码</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash"></script>
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
+</body>
+</html>
