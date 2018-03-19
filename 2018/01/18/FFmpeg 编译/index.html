@@ -88,7 +88,7 @@
 <meta property="og:description" content="环境 LinuxNDk版本：13FFmpeg 版本3.3.3 Linux 环境下配置NDK省略。。。。FFmpeg 解压省略。。。。。 开始进入正题了 稍等片刻 首先进ffmpeg 下的configure 文件中的： 1234567SLIBNAME_WITH_MAJOR=&amp;apos;$(SLIBNAME).$(LIBMAJOR)&amp;apos;LIB_INSTALL_EXTRA_CMD=&amp;apos;$">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20170803112303050?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaHVhbmdndW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-03-16T08:24:05.739Z">
+<meta property="og:updated_time" content="2018-03-19T02:24:00.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FFmpeg编译">
 <meta name="twitter:description" content="环境 LinuxNDk版本：13FFmpeg 版本3.3.3 Linux 环境下配置NDK省略。。。。FFmpeg 解压省略。。。。。 开始进入正题了 稍等片刻 首先进ffmpeg 下的configure 文件中的： 1234567SLIBNAME_WITH_MAJOR=&amp;apos;$(SLIBNAME).$(LIBMAJOR)&amp;apos;LIB_INSTALL_EXTRA_CMD=&amp;apos;$">
@@ -359,6 +359,7 @@
 <p>开始进入正题了 稍等片刻</p>
 <p>首先进ffmpeg 下的configure 文件中的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SLIBNAME_WITH_MAJOR=&apos;$(SLIBNAME).$(LIBMAJOR)&apos;</span><br><span class="line"></span><br><span class="line">LIB_INSTALL_EXTRA_CMD=&apos;$$(RANLIB)&quot;$(LIBDIR)/$(LIBNAME)&quot;&apos;</span><br><span class="line"></span><br><span class="line">SLIB_INSTALL_NAME=&apos;$(SLIBNAME_WITH_VERSION)&apos;</span><br><span class="line"></span><br><span class="line">SLIB_INSTALL_LINKS=&apos;$(SLIBNAME_WITH_MAJOR)$(SLIBNAME)&apos;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>修改成：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SLIBNAME_WITH_MAJOR=&apos;$(SLIBPREF)$(FULLNAME)-$(LIBMAJOR)$(SLIBSUF)&apos;</span><br><span class="line"></span><br><span class="line">LIB_INSTALL_EXTRA_CMD=&apos;$$(RANLIB)&quot;$(LIBDIR)/$(LIBNAME)&quot;&apos;</span><br><span class="line"></span><br><span class="line">SLIB_INSTALL_NAME=&apos;$(SLIBNAME_WITH_MAJOR)&apos;</span><br><span class="line"></span><br><span class="line">SLIB_INSTALL_LINKS=&apos;$(SLIBNAME)&apos;</span><br></pre></td></tr></table></figure>
 <p>继续往下走<br>配置ffmpeg 编译所需要的sh文件</p>
