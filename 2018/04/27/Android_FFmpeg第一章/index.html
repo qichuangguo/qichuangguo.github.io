@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Jni,openCv," />
+  <meta name="keywords" content="FFmpeg," />
 
 
 
@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="配置CMakeLists.txt 文件12345678910111213141516171819//设置OpenCv的sdk路径的路径set(pathToOpenCv F:/opencv-3.4.1-android-sdk/OpenCV-android-sdk/sdk) //设置项目中的jni目录（CMAKE_SOURCE_DIR：工程顶级目录）set(ocvlibs &amp;quot;$&amp;#123;C">
-<meta name="keywords" content="Jni,openCv">
+<meta name="description" content="几经波折，还是想研究研究FFmpeg，放下一切从零开始。 首先创建FFmpeg项目，勾选Include C++ support，然后傻瓜式的下一步就好了。  项目创建好之后在man目录下新建jniLibs并导入.so 库。">
+<meta name="keywords" content="FFmpeg">
 <meta property="og:type" content="article">
-<meta property="og:title" content="openCv编译">
-<meta property="og:url" content="http://yoursite.com/2018/03/20/OpenCV编译/index.html">
+<meta property="og:title" content="Android音视频之FFmpeg第一章 Android环境搭建">
+<meta property="og:url" content="http://yoursite.com/2018/04/27/Android_FFmpeg第一章/index.html">
 <meta property="og:site_name" content="随风的博客">
-<meta property="og:description" content="配置CMakeLists.txt 文件12345678910111213141516171819//设置OpenCv的sdk路径的路径set(pathToOpenCv F:/opencv-3.4.1-android-sdk/OpenCV-android-sdk/sdk) //设置项目中的jni目录（CMAKE_SOURCE_DIR：工程顶级目录）set(ocvlibs &amp;quot;$&amp;#123;C">
+<meta property="og:description" content="几经波折，还是想研究研究FFmpeg，放下一切从零开始。 首先创建FFmpeg项目，勾选Include C++ support，然后傻瓜式的下一步就好了。  项目创建好之后在man目录下新建jniLibs并导入.so 库。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T07:22:42.994Z">
+<meta property="og:image" content="https://i.imgur.com/FW9FSEj.png">
+<meta property="og:image" content="https://i.imgur.com/bEkv61l.png">
+<meta property="og:image" content="https://i.imgur.com/U50vU08.png">
+<meta property="og:updated_time" content="2018-04-28T08:22:16.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="openCv编译">
-<meta name="twitter:description" content="配置CMakeLists.txt 文件12345678910111213141516171819//设置OpenCv的sdk路径的路径set(pathToOpenCv F:/opencv-3.4.1-android-sdk/OpenCV-android-sdk/sdk) //设置项目中的jni目录（CMAKE_SOURCE_DIR：工程顶级目录）set(ocvlibs &amp;quot;$&amp;#123;C">
+<meta name="twitter:title" content="Android音视频之FFmpeg第一章 Android环境搭建">
+<meta name="twitter:description" content="几经波折，还是想研究研究FFmpeg，放下一切从零开始。 首先创建FFmpeg项目，勾选Include C++ support，然后傻瓜式的下一步就好了。  项目创建好之后在man目录下新建jniLibs并导入.so 库。">
+<meta name="twitter:image" content="https://i.imgur.com/FW9FSEj.png">
 
 
 
@@ -120,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/20/OpenCV编译/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/27/Android_FFmpeg第一章/"/>
 
 
 
 
 
-  <title>openCv编译 | 随风的博客</title>
+  <title>Android音视频之FFmpeg第一章 Android环境搭建 | 随风的博客</title>
   
 
 
@@ -263,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/OpenCV编译/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/Android_FFmpeg第一章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="随风">
@@ -280,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">openCv编译</h1>
+          <h1 class="post-title" itemprop="name headline">Android音视频之FFmpeg第一章 Android环境搭建</h1>
         
 
         <div class="post-meta">
@@ -292,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T15:06:06+08:00">
-                2018-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T16:57:45+08:00">
+                2018-04-27
               </time>
             
 
@@ -315,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/移动端/" itemprop="url" rel="index">
-                    <span itemprop="name">移动端</span>
+                  <a href="/categories/FFmpeg/" itemprop="url" rel="index">
+                    <span itemprop="name">FFmpeg</span>
                   </a>
                 </span>
 
@@ -352,10 +356,120 @@
       
 
       
-        <h1 id="配置CMakeLists-txt-文件"><a href="#配置CMakeLists-txt-文件" class="headerlink" title="配置CMakeLists.txt 文件"></a>配置CMakeLists.txt 文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//设置OpenCv的sdk路径的路径</span><br><span class="line">set(pathToOpenCv F:/opencv-3.4.1-android-sdk/OpenCV-android-sdk/sdk) </span><br><span class="line">//设置项目中的jni目录（CMAKE_SOURCE_DIR：工程顶级目录）</span><br><span class="line">set(ocvlibs &quot;$&#123;CMAKE_SOURCE_DIR&#125;/src/main/jni&quot;)</span><br><span class="line">//引用头文件</span><br><span class="line">include_directories(opencv-libs PRIVATE  $&#123;pathToOpenCv&#125;/native/jni/include)</span><br><span class="line">//加载静态库</span><br><span class="line">add_library(lib_opencv STATIC IMPORTED)</span><br><span class="line">set_target_properties(lib_opencv</span><br><span class="line">                     PROPERTIES</span><br><span class="line">                     IMPORTED_LOCATION $&#123;ocvlibs&#125;/$&#123;ANDROID_ABI&#125;/libopencv_java3.so</span><br><span class="line">                     )</span><br><span class="line">//进行链接</span><br><span class="line">target_link_libraries( # Specifies the target library.</span><br><span class="line">                     native-lib</span><br><span class="line">                     lib_opencv</span><br><span class="line">                     # Links the target library to the log library</span><br><span class="line">                     # included in the NDK.</span><br><span class="line">                     $&#123;log-lib&#125; )</span><br></pre></td></tr></table></figure>
-<h1 id="配置Gradle"><a href="#配置Gradle" class="headerlink" title="配置Gradle"></a>配置Gradle</h1><pre><code>abiFilters &apos;armeabi&apos;
-</code></pre><p>在android 节点中加入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            jniLibs.srcDirs = [&apos;F:\\TestDemo\\OpenCVDemo\\app\\src\\main\\jni&apos;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <p>  <em>几经波折，还是想研究研究FFmpeg，放下一切从零开始。</em></p>
+<p>首先创建FFmpeg项目，勾选Include C++ support，然后傻瓜式的下一步就好了。</p>
+<p><img src="https://i.imgur.com/FW9FSEj.png" alt=""></p>
+<p>项目创建好之后在man目录下新建jniLibs并导入.so 库。<br><img src="https://i.imgur.com/bEkv61l.png" alt=""></p>
+<a id="more"></a>
+<p>之后打开CMakeLists.txt文件编写编译脚本</p>
+<pre><code>add_library( # Sets the name of the library.
+ native-lib
+ # Sets the library as a shared library.
+ SHARED
+ # Provides a relative path to your source file(s).
+ src/main/cpp/native-lib.cpp)
+
+# Searches for a specified prebuilt library and stores the path as a
+# variable. Because CMake includes system libraries in the search path by
+# default, you only need to specify the name of the public NDK library
+# you want to add. CMake verifies that the library exists before
+# completing its build.
+
+find_library( # Sets the name of the path variable.
+  log-lib
+  log )
+
+# Specifies libraries CMake should link to your target library. You
+# can link multiple libraries, such as libraries you define in this
+# build script, prebuilt third-party libraries, or system libraries.
+
+set(distribution_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs/armeabi)
+
+message(STATUS &quot;source_folder: ${distribution_DIR}&quot;)
+
+add_library( avutil-55
+ SHARED
+ IMPORTED )
+
+
+set_target_properties( avutil-55
+   PROPERTIES IMPORTED_LOCATION
+   ${distribution_DIR}/libavutil-55.so)
+
+add_library( swresample-2
+ SHARED
+ IMPORTED )
+set_target_properties( swresample-2
+   PROPERTIES IMPORTED_LOCATION
+   ${distribution_DIR}/libswresample-2.so)
+add_library( avcodec-57
+ SHARED
+ IMPORTED )
+set_target_properties( avcodec-57
+   PROPERTIES IMPORTED_LOCATION
+   ${distribution_DIR}/libavcodec-57.so)
+add_library( avfilter-6
+ SHARED
+ IMPORTED )
+set_target_properties( avfilter-6
+  PROPERTIES IMPORTED_LOCATION
+  ${distribution_DIR}/libavfilter-6.so)
+add_library( swscale-4
+ SHARED
+ IMPORTED )
+set_target_properties( swscale-4
+   PROPERTIES IMPORTED_LOCATION
+   ${distribution_DIR}/libswscale-4.so)
+add_library( avdevice-57
+ SHARED
+ IMPORTED )
+set_target_properties( avdevice-57
+   PROPERTIES IMPORTED_LOCATION
+   ${distribution_DIR}/libavdevice-57.so)
+add_library( avformat-57
+ SHARED
+ IMPORTED )
+set_target_properties( avformat-57
+   PROPERTIES IMPORTED_LOCATION
+   ${distribution_DIR}/libavformat-57.so)
+add_library( postproc-54
+ SHARED
+ IMPORTED )
+set_target_properties( postproc-54
+   PROPERTIES IMPORTED_LOCATION
+   ${distribution_DIR}/libpostproc-54.so)
+
+
+set(CMAKE_VERBOSE_MAKEFILE on)
+set(CMAKE_CXX_FLAGS &quot;${CMAKE_CXX_FLAGS} -std=gnu++11 &quot;)
+include_directories(src/main/cpp)
+include_directories(F:/TestDemo/FFmpegMainTest/ffmpeg-3.3.1/ffmpeg-3.3.1)
+target_link_libraries(  native-lib
+swresample-2
+avutil-55
+avcodec-57
+avfilter-6
+swscale-4
+avdevice-57
+avformat-57
+postproc-54
+${log-lib}
+${android-lib})
+</code></pre><p><strong>设置FFmpeg so的路径：</strong></p>
+<p>set(distribution_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs/armeabi)</p>
+<p><strong>导入FFmpeg 头文件：</strong></p>
+<p>include_directories(F:/TestDemo/FFmpegMainTest/ffmpeg-3.3.1/ffmpeg-3.3.1)</p>
+<p>修改build.gradle文件</p>
+<pre><code>cmake {
+   cppFlags &quot;-std=c++11 -frtti -fexceptions&quot;
+   arguments &quot;-DANDROID_STL=c++_static&quot;
+}
+
+ndk { abiFilters  &apos;armeabi-v7a&apos;}
+</code></pre><p>注：</p>
+<p> 如果遇到 java.lang.UnsatisfiedLinkError: dlopen failed: library “libavutil-55.so” …中问题只要把jniLibs下的so库拷贝到图中的文件中就可以了</p>
+<p><img src="https://i.imgur.com/U50vU08.png" alt=""></p>
+<p>到此就可以进行FFmpeg开发了。</p>
 
       
     </div>
@@ -415,9 +529,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Jni/" rel="tag"><i class="fa fa-tag"></i> Jni</a>
-          
-            <a href="/tags/openCv/" rel="tag"><i class="fa fa-tag"></i> openCv</a>
+            <a href="/tags/FFmpeg/" rel="tag"><i class="fa fa-tag"></i> FFmpeg</a>
           
         </div>
       
@@ -430,8 +542,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/20/c++的数据类型/" rel="next" title="C++ 数据类型">
-                <i class="fa fa-chevron-left"></i> C++ 数据类型
+              <a href="/2018/03/30/MediaCodec编H264视频/" rel="next" title="Android获取摄像头数据进行硬编码">
+                <i class="fa fa-chevron-left"></i> Android获取摄像头数据进行硬编码
               </a>
             
           </div>
@@ -440,8 +552,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/27/FFmpeg常用函数/" rel="prev" title="FFmpeg常用函数">
-                FFmpeg常用函数 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/28/FFmpeg视频解码/" rel="prev" title="Android音视频之FFmpeg第二章 FFmpeg初始解码">
+                Android音视频之FFmpeg第二章 FFmpeg初始解码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -499,17 +611,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -573,22 +676,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置CMakeLists-txt-文件"><span class="nav-number">1.</span> <span class="nav-text">配置CMakeLists.txt 文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Gradle"><span class="nav-number">2.</span> <span class="nav-text">配置Gradle</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
