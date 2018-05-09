@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="编码avformat_alloc_output_context2()： 在基于FFmpeg的视音频编码程序中，该函数通常是第一个调动的函数（除了组件注册函数av_register_all()），作用是可以初始化一个用于输出的AVFormatContext结构体。它的声明位于libavformat\avformat.h 12345678  int avformat_alloc_output_cont">
+<meta name="description" content="常见的结构体：AVFormatContext：  统领全局的基本结构体。主要用于处理封装格式（FLV/MKV/RMVB等） 初始化：avformat_alloc_context() 销毁：avformat_free_context()  AVIOContext：  输入输出对应的结构体，用于输入输出（读写文件，RTMP协议等）。 初始化：avio_alloc_context()  AVStream">
 <meta name="keywords" content="视频，FFmpeg">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FFmpeg常用函数">
 <meta property="og:url" content="http://yoursite.com/2018/03/27/FFmpeg常用函数/index.html">
 <meta property="og:site_name" content="随风的博客">
-<meta property="og:description" content="编码avformat_alloc_output_context2()： 在基于FFmpeg的视音频编码程序中，该函数通常是第一个调动的函数（除了组件注册函数av_register_all()），作用是可以初始化一个用于输出的AVFormatContext结构体。它的声明位于libavformat\avformat.h 12345678  int avformat_alloc_output_cont">
+<meta property="og:description" content="常见的结构体：AVFormatContext：  统领全局的基本结构体。主要用于处理封装格式（FLV/MKV/RMVB等） 初始化：avformat_alloc_context() 销毁：avformat_free_context()  AVIOContext：  输入输出对应的结构体，用于输入输出（读写文件，RTMP协议等）。 初始化：avio_alloc_context()  AVStream">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-27T03:02:00.678Z">
+<meta property="og:updated_time" content="2018-05-09T02:49:22.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FFmpeg常用函数">
-<meta name="twitter:description" content="编码avformat_alloc_output_context2()： 在基于FFmpeg的视音频编码程序中，该函数通常是第一个调动的函数（除了组件注册函数av_register_all()），作用是可以初始化一个用于输出的AVFormatContext结构体。它的声明位于libavformat\avformat.h 12345678  int avformat_alloc_output_cont">
+<meta name="twitter:description" content="常见的结构体：AVFormatContext：  统领全局的基本结构体。主要用于处理封装格式（FLV/MKV/RMVB等） 初始化：avformat_alloc_context() 销毁：avformat_free_context()  AVIOContext：  输入输出对应的结构体，用于输入输出（读写文件，RTMP协议等）。 初始化：avio_alloc_context()  AVStream">
 
 
 
@@ -352,8 +352,70 @@
       
 
       
-        <h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>avformat_alloc_output_context2()：</p>
-<p>在基于FFmpeg的视音频编码程序中，该函数通常是第一个调动的函数（除了组件注册函数av_register_all()），作用是可以初始化一个用于输出的AVFormatContext结构体。<br>它的声明位于libavformat\avformat.h<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">avformat_alloc_output_context2</span><span class="params">(AVFormatContext **ctx, AVOutputFormat *oformat,  </span></span></span><br><span class="line"><span class="function"><span class="params">                                   <span class="keyword">const</span> <span class="keyword">char</span> *format_name, <span class="keyword">const</span> <span class="keyword">char</span> *filename)</span></span>;  </span><br><span class="line"><span class="comment">//ctx:调用成功之后创建的AVFormatContext结构体。</span></span><br><span class="line"><span class="comment">//oformat：指定AVFormatContext中的AVOutputFormat，用于确定输出格式。如果指定为NULL，可以设定后两个参数（format_name或者filename）</span></span><br><span class="line"><span class="comment">//PS：使用该参数需要自己手动获取AVOutputFormat，相对于使用后两个参数来说要麻烦一些。</span></span><br><span class="line"><span class="comment">//format_name：指定输出格式的名称。根据格式名称，FFmpeg会推测输出格式。输出格式可以是“flv”，“mkv”等等。</span></span><br><span class="line"><span class="comment">//filename：指定输出文件的名称。根据文件名称，FFmpeg会推测输出格式。文件名称可以是“xx.flv”，“yy.mkv”等等。</span></span><br><span class="line"><span class="comment">//函数执行成功的话，其返回值大于等于0。</span></span><br></pre></td></tr></table></figure></p>
+        <h1 id="常见的结构体："><a href="#常见的结构体：" class="headerlink" title="常见的结构体："></a>常见的结构体：</h1><p><strong>AVFormatContext：</strong></p>
+<ul>
+<li>统领全局的基本结构体。主要用于处理封装格式（FLV/MKV/RMVB等）</li>
+<li>初始化：avformat_alloc_context()</li>
+<li>销毁：avformat_free_context()</li>
+</ul>
+<p><strong>AVIOContext：</strong></p>
+<ul>
+<li>输入输出对应的结构体，用于输入输出（读写文件，RTMP协议等）。</li>
+<li>初始化：avio_alloc_context()</li>
+</ul>
+<p><strong>AVStream ，AVCodecContext：</strong></p>
+<ul>
+<li>视音频流对应的结构体，用于视音频编解码。</li>
+<li>AVStream的初始化函数是avformat_new_stream()</li>
+<li>使用销毁AVFormatContext的avformat_free_context()销毁</li>
+<li>avcodec_alloc_context3()初始化AVStream中的AVCodecContext<a id="more"></a>
+</li>
+</ul>
+<p><strong>AVFrame：</strong></p>
+<ul>
+<li>存储非压缩的数据（视频对应RGB/YUV像素数据，音频对应PCM采样数据）</li>
+<li>初始化:av_frame_alloc()</li>
+<li>销毁：av_frame_free()</li>
+<li>该函数并没有为AVFrame的像素数据分配空间。因此AVFrame中的像素数据的空间需要自行分配空间，例如使用avpicture_fill()，av_image_fill_arrays()等函数</li>
+</ul>
+<p><strong>AVPacket：</strong></p>
+<ul>
+<li>存储压缩数据（视频对应H.264等码流数据，音频对应AAC/MP3等码流数据）</li>
+<li>初始化：av_init_packet()和av_new_packet()销毁函数是av_free_packet()。在初始化函数中av_init_packet()比较简单，初始化一些字段；而av_new_packet()相对“高级”一些，除了包含av_init_packet()的功能之外，还包含了AVPacket内部内存的分配</li>
+<li>销毁:av_free_packet()</li>
+</ul>
+<h1 id="常见的函数："><a href="#常见的函数：" class="headerlink" title="常见的函数："></a>常见的函数：</h1><p><strong>打开FFmpeg的输入输出文件(libavformat\avio.h):</strong></p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avio_open2(AVIOContext **s, <span class="keyword">const</span> <span class="keyword">char</span> *url, <span class="keyword">int</span> flags, <span class="keyword">const</span> AVIOInterruptCB *int_cb, AVDictionary **options)：</span><br></pre></td></tr></table></figure>
+<p>  s：函数调用成功之后创建的AVIOContext结构体。<br>  url：输入输出协议的地址（文件也是一种“广义”的协议，对于文件来说就是文件的路径）<br>  flags：打开地址的方式。可以选择只读，只写，或者读写。取值如下</p>
+<pre><code>AVIO_FLAG_READ：只读。
+AVIO_FLAG_WRITE：只写。
+AVIO_FLAG_READ_WRITE：读写。
+</code></pre><p><strong>初始化一个AVIOContext:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">avio_alloc_context(  </span><br><span class="line">                  <span class="keyword">unsigned</span> <span class="keyword">char</span> *buffer,  </span><br><span class="line">                  <span class="keyword">int</span> buffer_size,  </span><br><span class="line">                  <span class="keyword">int</span> write_flag,  </span><br><span class="line">                  <span class="keyword">void</span> *opaque,  </span><br><span class="line">                  <span class="keyword">int</span> (*read_packet)(<span class="keyword">void</span> *opaque, <span class="keyword">uint8_t</span> *buf, <span class="keyword">int</span> buf_size),  </span><br><span class="line">                  <span class="keyword">int</span> (*write_packet)(<span class="keyword">void</span> *opaque, <span class="keyword">uint8_t</span> *buf, <span class="keyword">int</span> buf_size),  </span><br><span class="line">                  <span class="keyword">int64_t</span> (*seek)(<span class="keyword">void</span> *opaque, <span class="keyword">int64_t</span> offset, <span class="keyword">int</span> whence))</span><br></pre></td></tr></table></figure>
+<p>buffer：AVIOContext中的Buffer<br>buffer_size：AVIOContext中的Buffer的大小<br>write_flag：设置为1则Buffer可写；否则Buffer只可读。<br>opaque：用户自定义数据。<br>read_packet()：读取外部数据，填充Buffer的函数<br>write_packet()：向Buffer中写入数据的函数<br>seek()：用于Seek的函数。</p>
+<p><strong>查找FFmpeg的编解码器(libavcodec\avcodec.h):</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avcodec_find_encoder(<span class="keyword">enum</span> AVCodecID id)和avcodec_find_decoder（<span class="keyword">enum</span> AVCodecID id)）</span><br></pre></td></tr></table></figure>
+<p>id:函数的参数是一个编解码器的ID，返回查找到的编码器（没有找到就返回NULL）</p>
+<p><strong>初始化一个视音频编解码器的AVCodecContext（libavcodec\avcodec.h）：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">avcodec_open2</span><span class="params">(AVCodecContext *avctx, <span class="keyword">const</span> AVCodec *codec, AVDictionary **options)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>avctx：需要初始化的AVCodecContext<br>codec：输入的AVCodec<br>options：一些选项。例如使用libx264编码的时候，“preset”，“tune”等都可以通过该参数设置。</p>
+<p><strong>用于关闭编码器(libavcodec\utils.c):</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">avcodec_close</span><span class="params">(AVCodecContext *avctx)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>打开多媒体数据并且获得一些相关的信息(libavformat\utils.c):</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">avformat_open_input</span><span class="params">(AVFormatContext **ps, <span class="keyword">const</span> <span class="keyword">char</span> *filename, AVInputFormat *fmt, AVDictionary **options)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>ps：函数调用成功之后处理过的AVFormatContext结构体。<br>file：打开的视音频流的URL。<br>fmt：强制指定AVFormatContext中AVInputFormat的。这个参数一般情况下可以设置为NULL，这样FFmpeg可以自动检测AVInputFormat。<br>dictionay：附加的一些选项，一般情况下可以设置为NULL。<br>函数执行成功的话，其返回值大于等于0。</p>
+<p><strong>根据输入数据查找合适的AVInputFormat:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">AVInputFormat *<span class="title">av_probe_input_format2</span><span class="params">(AVProbeData *pd, <span class="keyword">int</span> is_opened, <span class="keyword">int</span> *score_max)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>pd：存储输入数据信息的AVProbeData结构体<br>is_opened：文件是否打开。<br>score_max：判决AVInputFormat的门限值。只有某格式判决分数大于该门限值的时候，函数才会返回该封装格式，否则返回NULL。<br>该函数中涉及到一个结构体AVProbeData，用于存储输入文件的一些信息，它的定义如下所示。</p>
+<p><strong>可以读取一部分视音频数据并且获得一些相关的信息:</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">avformat_find_stream_info</span><span class="params">(AVFormatContext *ic, AVDictionary **options)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>ic：输入的AVFormatContext。<br>options:传NULL</p>
+<p><strong>取码流中的音频若干帧或者视频一帧(libavformat\utils.c):</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">av_read_frame</span><span class="params">(AVFormatContext *s, AVPacket *pkt)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>s：输入的AVFormatContext<br>pkt：输出的AVPacket<br>如果返回0则说明读取正常</p>
+<p><strong>解码一帧视频数据(已过期):</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">avcodec_decode_video2(AVCodecContext *avctx, AVAVCodecContext *avctx, AVFrame *picture,  </span><br><span class="line">                         <span class="keyword">int</span> *got_picture_ptr,  </span><br><span class="line">                         <span class="keyword">const</span> AVPacket *avpktFrame *picture,  </span><br><span class="line">                         <span class="keyword">int</span> *got_picture_ptr,  </span><br><span class="line">                         <span class="keyword">const</span> AVPacket *avpkt)</span><br></pre></td></tr></table></figure></p>
+<p>使用avcodec_send_packet（AVCodecContext <em>avctx, const AVPacket </em>avpkt） 和 avcodec_receive_frame(AVCodecContext <em>avctx, AVFrame </em>frame);代替avcodec_decode_video2（）</p>
+<p><strong>用于关闭一个AVFormatContext：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">avformat_close_input</span><span class="params">(AVFormatContext **s)</span></span>;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -579,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编码"><span class="nav-number">1.</span> <span class="nav-text">编码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的结构体："><span class="nav-number">1.</span> <span class="nav-text">常见的结构体：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的函数："><span class="nav-number">2.</span> <span class="nav-text">常见的函数：</span></a></li></ol></div>
             
 
           </div>

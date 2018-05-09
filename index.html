@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/28/FFmpeg视频解码/" itemprop="url">Android音视频之FFmpeg第二章 FFmpeg初始解码</a></h1>
+                <a class="post-title-link" href="/2018/04/28/FFmpeg视频解码/" itemprop="url">Android音视频之FFmpeg<<第二章 FFmpeg初始解码>></a></h1>
         
 
         <div class="post-meta">
@@ -439,7 +439,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/27/Android_FFmpeg第一章/" itemprop="url">Android音视频之FFmpeg第一章 Android环境搭建</a></h1>
+                <a class="post-title-link" href="/2018/04/27/Android_FFmpeg第一章/" itemprop="url">Android音视频之FFmpeg<<第一章 Android环境搭建>></a></h1>
         
 
         <div class="post-meta">
@@ -821,11 +821,30 @@
 
       
         
-          
-            <h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>avformat_alloc_output_context2()：</p>
-<p>在基于FFmpeg的视音频编码程序中，该函数通常是第一个调动的函数（除了组件注册函数av_register_all()），作用是可以初始化一个用于输出的AVFormatContext结构体。<br>它的声明位于libavformat\avformat.h<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">avformat_alloc_output_context2</span><span class="params">(AVFormatContext **ctx, AVOutputFormat *oformat,  </span></span></span><br><span class="line"><span class="function"><span class="params">                                   <span class="keyword">const</span> <span class="keyword">char</span> *format_name, <span class="keyword">const</span> <span class="keyword">char</span> *filename)</span></span>;  </span><br><span class="line"><span class="comment">//ctx:调用成功之后创建的AVFormatContext结构体。</span></span><br><span class="line"><span class="comment">//oformat：指定AVFormatContext中的AVOutputFormat，用于确定输出格式。如果指定为NULL，可以设定后两个参数（format_name或者filename）</span></span><br><span class="line"><span class="comment">//PS：使用该参数需要自己手动获取AVOutputFormat，相对于使用后两个参数来说要麻烦一些。</span></span><br><span class="line"><span class="comment">//format_name：指定输出格式的名称。根据格式名称，FFmpeg会推测输出格式。输出格式可以是“flv”，“mkv”等等。</span></span><br><span class="line"><span class="comment">//filename：指定输出文件的名称。根据文件名称，FFmpeg会推测输出格式。文件名称可以是“xx.flv”，“yy.mkv”等等。</span></span><br><span class="line"><span class="comment">//函数执行成功的话，其返回值大于等于0。</span></span><br></pre></td></tr></table></figure></p>
-
-          
+          <h1 id="常见的结构体："><a href="#常见的结构体：" class="headerlink" title="常见的结构体："></a>常见的结构体：</h1><p><strong>AVFormatContext：</strong></p>
+<ul>
+<li>统领全局的基本结构体。主要用于处理封装格式（FLV/MKV/RMVB等）</li>
+<li>初始化：avformat_alloc_context()</li>
+<li>销毁：avformat_free_context()</li>
+</ul>
+<p><strong>AVIOContext：</strong></p>
+<ul>
+<li>输入输出对应的结构体，用于输入输出（读写文件，RTMP协议等）。</li>
+<li>初始化：avio_alloc_context()</li>
+</ul>
+<p><strong>AVStream ，AVCodecContext：</strong></p>
+<ul>
+<li>视音频流对应的结构体，用于视音频编解码。</li>
+<li>AVStream的初始化函数是avformat_new_stream()</li>
+<li>使用销毁AVFormatContext的avformat_free_context()销毁</li>
+<li>avcodec_alloc_context3()初始化AVStream中的AVCodecContext
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/27/FFmpeg常用函数/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
